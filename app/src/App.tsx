@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  fetch('/user/12').then((res: any) => res.data).catch(err => {
+    console.log('Err:', err);
+  })
+  useEffect(() => {
+    console.log("coucou");
+  }, [])
+
   return (
     <div className="App">
       <header className="App-header">
