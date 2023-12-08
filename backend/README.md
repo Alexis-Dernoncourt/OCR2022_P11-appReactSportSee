@@ -1,4 +1,5 @@
-# Project 9 - Front-end Dashboard
+# Project 9 - Front-end Dashboard - 
+# please use YARN to run backend
 
 This repo contains all the source code to run the micro API for the sports analytics dashboard SportSee.
 
@@ -19,6 +20,7 @@ If you are working with several versions of NodeJS, we recommend you install [nv
 
 - Fork the repository
 - Clone it on your computer.
+- Update `port = 5000` into `backend/app/index.js` to prevent same port (3000) from frontend app.
 - The `yarn` command will allow you to install the dependencies.
 - The `yarn dev` command will allow you to run the micro API.
 
