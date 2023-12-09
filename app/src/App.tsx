@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react"
 import "./App.scss"
 import { baseApiMock } from "./api/config"
-import { User } from "../types/index"
+import { AverageSessionType, SessionType, User, UserPerformanceType } from "../types/index"
 import { useParams } from "react-router-dom"
 import Spinner from "./components/Spinner"
 import Header from "./components/Header/Header"
 import SideNav from "./components/SideNav/SideNav"
+import Name from "./components/Name/Name"
 // import { useWidowFocus } from "./hooks"
 
 type UserID = {
@@ -13,7 +14,10 @@ type UserID = {
 }
 
 function App() {
-  const [data, setData] = useState<User | null>(null)
+  const [userData, setUserData] = useState<User | null>(null)
+  const [userActivity, setUserActivity] = useState<SessionType[] | null>(null)
+  const [userAverageSessions, setUserAverageSessions] = useState<AverageSessionType[] | null>(null)
+  const [userPerformance, setUserPerformance] = useState<UserPerformanceType | null>(null)
   const [error, setError] = useState<any>(null)
   const params = useParams<UserID>()
 
@@ -23,11 +27,15 @@ function App() {
     if (!params.userId) throw Error("Id is missing!")
     try {
       // const request = await axiosInstance.request({ url: `/${params.userId}`, method: "get" })
-      const request: any = await baseApiMock
-      const result = await request.data
-      console.log("RESULT=>", result)
-
-      return result
+      const request1: any = await baseApiMock("user")
+      const request2: any = await baseApiMock("activity")
+      const request3: any = await baseApiMock("average-sessions")
+      const request4: any = await baseApiMock("performance")
+      const result1 = await request1.data
+      const result2 = await request2.data
+      const result3 = await request3.data
+      const result4 = await request4.data
+      return Promise.all([result1, result2, result3, result4])
     } catch (error) {
       console.log("Err:", error)
     }
@@ -36,7 +44,11 @@ function App() {
   useEffect(() => {
     fetchUser12()
       .then((data) => {
-        setData(data)
+        data && setUserData(data[0])
+        data && setUserActivity(data[1].sessions)
+        data && setUserAverageSessions(data[2].sessions)
+        data && console.log("DATA=>", data[3])
+        data && setUserPerformance(data[3])
       })
       .catch((e) => {
         setError(e)
@@ -46,7 +58,7 @@ function App() {
   return (
     <div className="app">
       <>
-        {!data ? (
+        {!userActivity || !userData ? (
           <Spinner />
         ) : (
           <>
@@ -56,12 +68,11 @@ function App() {
                 <SideNav />
                 <div className="app-content-container">
                   {error && <div>Error: {error.message}</div>}
-                  <div>
-                    {data?.userInfos.firstName} {data?.userInfos.lastName} - age: {data?.userInfos.age}
-                  </div>
-                  <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                  </p>
+                  {userData && <Name firstName={userData.userInfos.firstName} lastName={userData.userInfos.lastName} />}
+                  {userData && <p>{userData.todayScore}</p>}
+                  <div>Age: {userActivity[0].day}</div>
+                  {userAverageSessions && <div>Test: {userAverageSessions[0].sessionLength}</div>}
+                  {userPerformance && <div>TestPerf: {userPerformance.kind[1]}</div>}
                 </div>
               </main>
             </div>
