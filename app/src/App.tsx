@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react"
 import logo from "./logo.svg"
-import "./App.css"
-import { axiosInstance } from "./api/config"
+import "./App.scss"
+import { baseApiMock } from "./api/config"
 import { User } from "../types/index"
 import { useParams } from "react-router-dom"
 import Spinner from "./components/Spinner"
+import Header from "./components/Header/Header"
 // import { useWidowFocus } from "./hooks"
 
 type UserID = {
@@ -21,9 +22,12 @@ function App() {
   async function fetchUser12() {
     if (!params.userId) throw Error("Id is missing!")
     try {
-      const request = await axiosInstance.request({ url: `/${params.userId}`, method: "get" })
+      // const request = await axiosInstance.request({ url: `/${params.userId}`, method: "get" })
+      const request: any = await baseApiMock
       const result = await request.data
-      return result.data
+      console.log("RESULT=>", result)
+
+      return result
     } catch (error) {
       console.log("Err:", error)
     }
@@ -32,9 +36,7 @@ function App() {
   useEffect(() => {
     fetchUser12()
       .then((data) => {
-        setTimeout(() => {
-          setData(data)
-        }, 5000)
+        setData(data)
       })
       .catch((e) => {
         setError(e)
@@ -42,21 +44,24 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
+    <div className="app">
       <>
         {!data ? (
           <Spinner />
         ) : (
-          <header className="App-header">
-            {error && <div>Error: {error.message}</div>}
-            <div>
-              {data?.userInfos.firstName} {data?.userInfos.lastName} - age: {data?.userInfos.age}
-            </div>
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.tsx</code> and save to reload.
-            </p>
-          </header>
+          <>
+            <Header />
+            <main className="app-header">
+              {error && <div>Error: {error.message}</div>}
+              <div>
+                {data?.userInfos.firstName} {data?.userInfos.lastName} - age: {data?.userInfos.age}
+              </div>
+              <img src={logo} className="app-logo" alt="logo" />
+              <p>
+                Edit <code>src/App.tsx</code> and save to reload.
+              </p>
+            </main>
+          </>
         )}
       </>
     </div>
