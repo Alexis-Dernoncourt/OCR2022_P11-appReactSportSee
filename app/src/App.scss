@@ -4,31 +4,31 @@
   text-align: center;
 }
 
-.app-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app-container {
+  min-height: calc(100vh + 12.1rem);
+  background-color: $white;
+  position: relative;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .app-logo {
-    animation: app-logo-spin infinite 20s linear;
-  }
   .spinner {
-    animation: app-logo-spin infinite 1s linear;
+    animation: spin infinite 1s linear;
   }
 }
 
-.app-header {
-  background-color: $white;
-  min-height: 100vh;
+.app-content {
+  color: $black;
+  display: flex;
+}
+
+.app-content-container {
+  width: 100%;
+  min-height: calc(100vh + 12.1rem);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: $black;
 }
 
-@keyframes app-logo-spin {
+@keyframes spin {
   from {
     transform: rotate(0deg);
   }

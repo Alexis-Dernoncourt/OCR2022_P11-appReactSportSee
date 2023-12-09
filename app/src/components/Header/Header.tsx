@@ -9,34 +9,22 @@ function Header() {
       <nav>
         <ul>
           <li>
-            <NavLink
-              to="/user/12"
-              className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}
-            >
+            <NavLink to="/user/12" className={({ isActive }) => (isActive ? "active" : "")}>
               Accueil
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/user/profile"
-              className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}
-            >
+            <NavLink to="/user/profile" className={({ isActive }) => (isActive ? "active" : "")}>
               Profil
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/settings"
-              className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}
-            >
+            <NavLink to="/settings" className={({ isActive }) => (isActive ? "active" : "")}>
               Réglage
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/community"
-              className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}
-            >
+            <NavLink to="/community" className={({ isActive }) => (isActive ? "active" : "")}>
               Communauté
             </NavLink>
           </li>
