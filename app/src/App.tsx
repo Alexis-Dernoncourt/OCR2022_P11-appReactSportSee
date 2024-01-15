@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react"
 import "./App.scss"
 import { baseApiMock } from "./api/config"
@@ -7,6 +8,7 @@ import Spinner from "./components/Spinner"
 import Header from "./components/Header/Header"
 import SideNav from "./components/SideNav/SideNav"
 import Name from "./components/Name/Name"
+import Activity from "./components/Activity/Activity"
 // import { useWidowFocus } from "./hooks"
 
 type UserID = {
@@ -49,6 +51,7 @@ function App() {
         data && setUserAverageSessions(data[2].sessions)
         data && console.log("DATA=>", data[3])
         data && setUserPerformance(data[3])
+        console.log("userActivity__APP:", userActivity)
       })
       .catch((e) => {
         setError(e)
@@ -69,10 +72,15 @@ function App() {
                 <div className="app-content-container">
                   {error && <div>Error: {error.message}</div>}
                   {userData && <Name firstName={userData.userInfos.firstName} lastName={userData.userInfos.lastName} />}
-                  {userData && <p>{userData.todayScore}</p>}
+                  {userActivity && (
+                    <div className="activity-container">
+                      <Activity userActivity={userActivity} />
+                    </div>
+                  )}
+                  {/* {userData && <p>{userData.todayScore}</p>}
                   <div>Age: {userActivity[0].day}</div>
                   {userAverageSessions && <div>Test: {userAverageSessions[0].sessionLength}</div>}
-                  {userPerformance && <div>TestPerf: {userPerformance.kind[1]}</div>}
+                  {userPerformance && <div>TestPerf: {userPerformance.kind[1]}</div>} */}
                 </div>
               </main>
             </div>
