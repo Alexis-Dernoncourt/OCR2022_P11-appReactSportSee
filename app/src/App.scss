@@ -28,6 +28,12 @@
   flex-direction: column;
 }
 
+.activity-container {
+  position: relative;
+  width: 60%;
+  height: 350px;
+}
+
 @keyframes spin {
   from {
     transform: rotate(0deg);
