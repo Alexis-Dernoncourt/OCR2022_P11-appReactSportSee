@@ -24,12 +24,13 @@ function Activity({ userActivity }: ActivityProps) {
 
   return (
     <>
-      <p className="activity-title">Acitivité quotidienne</p>
+      <p className="activity-title">Activité quotidienne</p>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           width={100}
           height={100}
           data={activitys}
+          title="Graphique - Activité quotidienne"
           margin={{
             top: 20,
             right: 30,
@@ -37,7 +38,7 @@ function Activity({ userActivity }: ActivityProps) {
             bottom: 5,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid stroke="#ccc" strokeWidth={1} strokeDasharray="5 5" vertical={false} />
           <XAxis dataKey="day" />
           <YAxis yAxisId="left" orientation="right" stroke="#020203" />
           <YAxis yAxisId="right" orientation="left" stroke="#FF0101" hide={true} />
