@@ -39,8 +39,8 @@ function Activity({ userActivity }: ActivityProps) {
           }}
         >
           <CartesianGrid stroke="#ccc" strokeWidth={1} strokeDasharray="5 5" vertical={false} />
-          <XAxis dataKey="day" />
-          <YAxis yAxisId="left" orientation="right" stroke="#020203" />
+          <XAxis dataKey="day" color="#020203" tickLine={false} axisLine={false} />
+          <YAxis yAxisId="left" orientation="right" stroke="#020203" tickLine={false} axisLine={false} />
           <YAxis yAxisId="right" orientation="left" stroke="#FF0101" hide={true} />
           <Tooltip
             contentStyle={{ background: "#FF0101", color: "#fff" }}

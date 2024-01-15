@@ -8,6 +8,9 @@
     opacity: 0.8;
     max-width: 150px;
 }
-.recharts-text.recharts-cartesian-axis-tick-value {
-    fill: #fff !important;
+
+.session-duration-container {
+    .recharts-text.recharts-cartesian-axis-tick-value {
+        fill: #fff !important;
+    }
 }
