@@ -9,6 +9,7 @@ import Header from "./components/Header/Header"
 import SideNav from "./components/SideNav/SideNav"
 import Name from "./components/Name/Name"
 import Activity from "./components/Activity/Activity"
+import SessionDuration from "./components/SessionDuration/SessionDuration"
 // import { useWidowFocus } from "./hooks"
 
 type UserID = {
@@ -72,15 +73,22 @@ function App() {
                 <div className="app-content-container">
                   {error && <div>Error: {error.message}</div>}
                   {userData && <Name firstName={userData.userInfos.firstName} lastName={userData.userInfos.lastName} />}
+                  {/* <div className="app-inside-content-container"> */}
                   {userActivity && (
                     <div className="activity-container">
                       <Activity userActivity={userActivity} />
+                    </div>
+                  )}
+                  {userAverageSessions && (
+                    <div className="session-duration-container">
+                      <SessionDuration userAverageSessions={userAverageSessions} />
                     </div>
                   )}
                   {/* {userData && <p>{userData.todayScore}</p>}
                   <div>Age: {userActivity[0].day}</div>
                   {userAverageSessions && <div>Test: {userAverageSessions[0].sessionLength}</div>}
                   {userPerformance && <div>TestPerf: {userPerformance.kind[1]}</div>} */}
+                  {/* </div> */}
                 </div>
               </main>
             </div>
