@@ -22,7 +22,6 @@ type AverageSessionProps = {
 }
 
 function SessionDuration({ userAverageSessions }: AverageSessionProps) {
-    console.log("SessionDurationProps:", userAverageSessions)
     const sessions = userAverageSessions.map((session) => {
         if (session.day === 1) {
             return { ...session, day: "L" };

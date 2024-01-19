@@ -10,6 +10,7 @@ import SideNav from "./components/SideNav/SideNav"
 import Name from "./components/Name/Name"
 import Activity from "./components/Activity/Activity"
 import SessionDuration from "./components/SessionDuration/SessionDuration"
+import UserPerfs from "./components/UserPerfs/UserPerfs"
 // import { useWidowFocus } from "./hooks"
 
 type UserID = {
@@ -50,9 +51,7 @@ function App() {
         data && setUserData(data[0])
         data && setUserActivity(data[1].sessions)
         data && setUserAverageSessions(data[2].sessions)
-        data && console.log("DATA=>", data[3])
         data && setUserPerformance(data[3])
-        console.log("userActivity__APP:", userActivity)
       })
       .catch((e) => {
         setError(e)
@@ -82,6 +81,11 @@ function App() {
                   {userAverageSessions && (
                     <div className="session-duration-container">
                       <SessionDuration userAverageSessions={userAverageSessions} />
+                    </div>
+                  )}
+                  {userPerformance && (
+                    <div className="user-perfs-container">
+                      <UserPerfs userPerformance={userPerformance} />
                     </div>
                   )}
                   {/* {userData && <p>{userData.todayScore}</p>}
