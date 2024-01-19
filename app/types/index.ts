@@ -19,8 +19,8 @@ type UserInfos = {
 
 export type UserPerformanceType = {
   userId: number
-  kind: KindType
-  data: DataPerfType
+  kind: KindType | any
+  data: DataPerfType[]
 }
 
 type KindType = {
@@ -32,7 +32,7 @@ type KindType = {
   6: "intensity"
 }
 
-type DataPerfType = {
+export type DataPerfType = {
   value: number
   kind: number
 }

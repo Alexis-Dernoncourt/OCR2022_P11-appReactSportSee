@@ -9,18 +9,10 @@ type ActivityProps = {
 }
 
 function Activity({ userActivity }: ActivityProps) {
-  console.log("ActivityProps:", userActivity)
   const activitys = userActivity.map((activity) => {
-    console.log("activity:", activity)
     const convertedDay = new Date(activity.day).getDate()
     return { day: convertedDay, kilogrammes: activity.kilogram, calories: activity.calories }
-    // Intl.DateTimeFormat("fr-FR", {
-    //   dateStyle: "short",
-    //   timeStyle: "short",
-    // }).format(new Date(activity.day))
   })
-
-  console.log("activitys_map:", activitys)
 
   return (
     <>
@@ -47,7 +39,6 @@ function Activity({ userActivity }: ActivityProps) {
             itemStyle={{ color: "#fff" }}
             labelFormatter={() => ""}
             formatter={(value, name, props) => {
-              console.log("toto:", value, name, props)
               if (name === "kilogrammes") {
                 return [`${value}Kg`, null]
               } else if (name === "calories") {
