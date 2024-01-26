@@ -5,12 +5,13 @@ export type User = {
   userInfos: UserInfos
 }
 
-type KeyData = {
+export type KeyData = {
   calorieCount: number
   carbohydrateCount: number
   lipidCount: number
   proteinCount: number
 }
+
 type UserInfos = {
   age: number
   firstName: string

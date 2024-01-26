@@ -12,6 +12,7 @@ import Activity from "./components/Activity/Activity"
 import SessionDuration from "./components/SessionDuration/SessionDuration"
 import UserPerfs from "./components/UserPerfs/UserPerfs"
 import UserScoreAvg from "./components/UserScoreAvg/UserScoreAvg"
+import UserInfosCards from "./components/UserInfosCards/UserInfosCards"
 // import { useWidowFocus } from "./hooks"
 
 type UserID = {
@@ -59,8 +60,6 @@ function App() {
       })
   }, [])
 
-  // console.log("userData:", userData?.keyData)
-
   return (
     <div className="app">
       <>
@@ -80,30 +79,28 @@ function App() {
                       <Activity userActivity={userActivity} />
                     </div>
                   )}
-                  <div className="app-inside-content-container">
-                    {userAverageSessions && (
-                      <div className="session-duration-container">
-                        <SessionDuration userAverageSessions={userAverageSessions} />
-                      </div>
-                    )}
-                    {userPerformance && (
-                      <div className="user-perfs-container">
-                        <UserPerfs userPerformance={userPerformance} />
-                      </div>
-                    )}
-                    {userData.todayScore && (
-                      <div className="score-avg-container">
-                        <UserScoreAvg userScore={userData.todayScore} />
-                      </div>
-                    )}
+                  <div className="app-inside-content-layout">
+                    <div className="app-inside-content-container">
+                      {userAverageSessions && (
+                        <div className="session-duration-container">
+                          <SessionDuration userAverageSessions={userAverageSessions} />
+                        </div>
+                      )}
+                      {userPerformance && (
+                        <div className="user-perfs-container">
+                          <UserPerfs userPerformance={userPerformance} />
+                        </div>
+                      )}
+                      {userData.todayScore && (
+                        <div className="score-avg-container">
+                          <UserScoreAvg userScore={userData.todayScore} />
+                        </div>
+                      )}
+                    </div>
                   </div>
                   {userData.keyData && (
                     <div className="user-cardinfos-container">
-                      {/* <UserInfosCards userInfos={userData.keyData} /> */}
-                      {/* <p>{userData.keyData.calorieCount}</p> */}
-                      {/* <p>{userData.keyData.carbohydrateCount}</p> */}
-                      {/* <p>{userData.keyData.lipidCount}</p> */}
-                      {/* <p>{userData.keyData.proteinCount}</p> */}
+                      <UserInfosCards userInfos={userData.keyData} />
                     </div>
                   )}
                 </div>
