@@ -19,34 +19,38 @@
 .app-content {
   color: $black;
   display: flex;
+  width: auto;
 }
 
 .app-content-container {
   width: 100%;
-  padding: 6.8rem 10.7rem;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 117px auto auto auto;
   grid-auto-rows: minmax(100px, auto);
   grid-template-areas:
-    "name name name"
-    "activity activity infos"
-    "inside-content inside-content infos";
+    "side-nav name name name"
+    "side-nav activity activity infos"
+    "side-nav inside-content inside-content infos";
 }
 .app-inside-content-layout {
   display: flex;
   width: 100%;
   grid-area: inside-content;
+  padding: 0 0 0 10.7rem;
 }
 .app-inside-content-container {
   width: 100%;
   display: flex;
   gap: 30px;
+  margin-bottom: 86px;
 }
 
 .activity-container {
   position: relative;
   height: 350px;
   grid-area: activity;
+  background-color: #00000005;
+  border-radius: 6px;
 }
 .session-duration-container,
 .user-perfs-container,
@@ -68,9 +72,10 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  // gap: 50px;
+  gap: 39px;
   grid-area: infos;
+  margin-right: 90px;
+  padding-bottom: 86px;
 }
 
 @keyframes spin {

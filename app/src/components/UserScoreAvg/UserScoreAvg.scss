@@ -1,10 +1,21 @@
+.user-score-main-title {
+    position: absolute;
+    width: max-content;
+    z-index: 10;
+    left: 30px;
+    top: 24px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 24px;
+}
+
 .user-score-title {
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background-color: #f8f8f8;
+    background-color: #FFFFFF;
     width: 60%;
     height: 60%;
 }

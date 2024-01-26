@@ -1,3 +1,5 @@
+@import "../../styles/colors";
+
 .Calories {
     &::before {
         content: url('../../../public/images/icons/info-cards/energy.svg');
@@ -32,8 +34,10 @@
     height: 60px;
     display: flex;
     align-items: center;
-    padding: 32px;
+    padding: 0 32px;
     flex: 1;
+    background-color: #00000005;
+    border-radius: 6px;
 }
 
 .card-info-item {

@@ -1,14 +1,16 @@
 @import "../../styles/colors";
 
 .sidenav-container {
-    width: 10.7rem;
+    width: 11.7rem;
     padding: 1rem;
     height: calc(100vh + 121px);
+    min-height: 100%;
     background-color: $backgroundColor;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    grid-area: side-nav;
 
     nav {
         display: flex;
