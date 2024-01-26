@@ -70,8 +70,8 @@ function App() {
             <Header />
             <div className="app-container">
               <main className="app-content">
-                <SideNav />
                 <div className="app-content-container">
+                  <SideNav />
                   {error && <div>Error: {error.message}</div>}
                   {userData && <Name firstName={userData.userInfos.firstName} lastName={userData.userInfos.lastName} />}
                   {userActivity && (

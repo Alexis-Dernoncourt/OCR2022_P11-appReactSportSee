@@ -2,17 +2,20 @@
 
 .activity-container {
   display: flex;
-  // align-items: center;
-  // justify-content: space-between;
-  background-color: transparent;
-  // padding: 30px;
-  // height: 100%;
+  background-color: #00000005;
+  border-radius: 6px;
+  max-height: 320px;
+  max-width: 835px;
+  margin-bottom: 30px;
+  margin-left: 107px;
+  margin-right: 31px;
 }
 
 .activity-title {
   position: absolute;
   top: 20px;
-  font-size: 22px;
-  font-weight: bold;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24px;
   margin-left: 20px;
 }

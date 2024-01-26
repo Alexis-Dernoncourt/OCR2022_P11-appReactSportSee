@@ -14,8 +14,9 @@ function UserScoreAvg({ userScore }: { userScore: number }) {
     ]
     return (
         <>
+            <div className='user-score-main-title'>Score</div>
             <div className='user-score-title'>{userScore * 100}% <br />de votre <br />objectif</div>
-            <ResponsiveContainer width="100%" height="100%" style={{ backgroundColor: '#f3f3f3', borderRadius: '10px' }}>
+            <ResponsiveContainer width="100%" height="100%" style={{ backgroundColor: '#00000005', borderRadius: '10px' }}>
                 <RadialBarChart
                     innerRadius="100%"
                     outerRadius="75%"

@@ -36,5 +36,5 @@ export const baseApiMock = (param: string) =>
           console.log(param)
           break
       }
-    }, 1000)
+    }, 500)
   })

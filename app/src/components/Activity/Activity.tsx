@@ -23,21 +23,21 @@ function Activity({ userActivity }: ActivityProps) {
           barGap={-40}
           title="Graphique - Activité quotidienne"
           margin={{
-            top: 20,
+            top: 23,
             right: 30,
             left: 20,
-            bottom: 5,
+            bottom: 23,
           }}
         >
-          <CartesianGrid stroke="#ccc" strokeWidth={1} strokeDasharray="5 5" vertical={false} />
-          <XAxis dataKey="day" color="#020203" tickLine={false} axisLine={false} />
+          <CartesianGrid stroke="#ccc" strokeWidth={1} strokeDasharray="2 2" vertical={false} />
+          <XAxis dataKey="day" color="#020203" tickLine={false} axisLine={false} tickMargin={16} />
           <YAxis yAxisId="left" orientation="right" stroke="#020203" tickLine={false} axisLine={false} />
           <YAxis yAxisId="right" orientation="left" stroke="#FF0101" hide={true} />
           <Tooltip
             contentStyle={{ background: "#FF0101", color: "#fff" }}
             itemStyle={{ color: "#fff" }}
             labelFormatter={() => ""}
-            formatter={(value, name, props) => {
+            formatter={(value, name) => {
               if (name === "kilogrammes") {
                 return [`${value}Kg`, null]
               } else if (name === "calories") {
