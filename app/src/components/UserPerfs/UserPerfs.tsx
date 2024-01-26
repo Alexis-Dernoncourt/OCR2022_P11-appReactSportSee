@@ -16,9 +16,9 @@ function UserPerfs({ userPerformance }: UserPerfsProps) {
     return (
         <>
             <ResponsiveContainer width="100%" height="100%" style={{ backgroundColor: '#282d30', borderRadius: '10px' }}>
-                <RadarChart outerRadius={90} data={userPerfsData}>
+                <RadarChart outerRadius={68} data={userPerfsData}>
                     <PolarGrid radialLines={false} />
-                    <PolarAngleAxis tickLine={false} dataKey="kind" stroke='#fff' tickFormatter={(props) => {
+                    <PolarAngleAxis tickLine={false} dataKey="kind" tick={{ fill: "white", fontSize: 12 }} fontSize={10} tickFormatter={(props) => {
                         switch (props) {
                             case 'intensity':
                                 return 'Intensité'
