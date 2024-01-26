@@ -19,9 +19,8 @@ function Activity({ userActivity }: ActivityProps) {
       <p className="activity-title">Activité quotidienne</p>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
-          width={100}
-          height={100}
           data={activitys}
+          barGap={-40}
           title="Graphique - Activité quotidienne"
           margin={{
             top: 20,
@@ -59,8 +58,8 @@ function Activity({ userActivity }: ActivityProps) {
               }
             }}
           />
-          <Bar yAxisId="left" dataKey="kilogrammes" fill="#020203" />
-          <Bar yAxisId="right" dataKey="calories" fill="#FF0101" />
+          <Bar yAxisId="left" radius={[20, 20, 0, 0]} maxBarSize={10} dataKey="kilogrammes" fill="#020203" />
+          <Bar yAxisId="right" radius={[20, 20, 0, 0]} maxBarSize={10} dataKey="calories" fill="#FF0101" />
         </BarChart>
       </ResponsiveContainer>
     </>

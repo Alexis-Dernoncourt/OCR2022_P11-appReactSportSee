@@ -1,0 +1,72 @@
+.Calories {
+    &::before {
+        content: url('../../../public/images/icons/info-cards/energy.svg');
+        background-color: #FD51811A;
+    }
+}
+
+.Glucides {
+    &::before {
+        content: url('../../../public/images/icons/info-cards/apple.svg');
+        background-color: #f9ce231b;
+    }
+}
+
+.Lipides{
+    &::before {
+        content: url('../../../public/images/icons/info-cards/cheeseburger.svg');
+        background-color: #FD51811A;
+    }
+}
+
+.Protéines {
+    &::before {
+        content: url('../../../public/images/icons/info-cards/chicken.svg');
+        background-color: #4AB8FF1A; // TODO: refactor colors
+    }
+}
+
+.card-info-container {
+    width: 100%;
+    max-width: 258px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 32px;
+    flex: 1;
+}
+
+.card-info-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    width: 258px;
+
+    &::before {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        border-radius: 6px;
+    }
+}
+
+.card-info-text-item {
+    text-align: left;
+    width: max-content;
+}
+
+.card-info-title {
+    color: #282D30;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.card-info-text {
+    color: #74798C;
+    font-size: 14px;
+    font-weight: 500;
+}
+
