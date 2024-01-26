@@ -29,8 +29,9 @@
 }
 .app-inside-content-container {
   width: 100%;
-  min-height: calc(100vh + 12.1rem);
+  // min-height: calc(100vh + 12.1rem);
   display: flex;
+  flex-wrap: wrap;
 }
 
 .activity-container {
@@ -38,17 +39,20 @@
   width: 60%;
   height: 350px;
 }
-.session-duration-container {
+.session-duration-container,
+.user-perfs-container,
+.score-avg-container {
+  flex: 1;
   position: relative;
-  width: 30%;
-  height: 300px;
+  height: 263px;
   padding: 5px;
+  max-width: 256px;
 }
-.user-perfs-container {
-  position: relative;
-  width: 30%;
-  height: 300px;
-  padding: 5px;
+
+.score-avg-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes spin {
