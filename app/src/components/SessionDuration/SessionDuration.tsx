@@ -15,27 +15,11 @@ import {
     LineChart,
     Line,
 } from "recharts"
-import { AverageSessionType } from "../../../types"
+import { User } from "../../../types"
 
-type AverageSessionProps = {
-    userAverageSessions: AverageSessionType[]
-}
-
-function SessionDuration({ userAverageSessions }: AverageSessionProps) {
-    const sessions = userAverageSessions.map((session) => {
-        if (session.day === 1) {
-            return { ...session, day: "L" };
-        } else if (session.day === 2 || session.day === 3) {
-            return { ...session, day: "M" };
-        } else if (session.day === 4) {
-            return { ...session, day: "J" };
-        } else if (session.day === 5) {
-            return { ...session, day: "V" };
-        } else if (session.day === 6) {
-            return { ...session, day: "S" };
-        } else if (session.day === 7) {
-            return { ...session, day: "D" };
-        }
+function SessionDuration({ user }: User) {
+    const sessions = user.getUserAverageSessions().map((session) => {
+        return user.formatUserAverageSessions(session)
     })
 
     // const handleMouseMove = (e: any) => {

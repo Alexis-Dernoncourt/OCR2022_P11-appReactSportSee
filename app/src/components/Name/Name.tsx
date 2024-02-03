@@ -1,12 +1,9 @@
 import React from "react"
 import "./Name.scss"
+import { User } from "../../../types"
 
-type Props = {
-  firstName: string
-  lastName?: string
-}
-
-function Name({ firstName }: Props) {
+function Name({ user }: User) {
+  const { firstName } = user.getUserInfos().userInfos
   return (
     <div className="name-container">
       <h1>

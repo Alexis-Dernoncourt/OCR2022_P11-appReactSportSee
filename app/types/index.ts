@@ -1,8 +1,37 @@
-export type User = {
+export type UserType = {
   id: number
-  todayScore: number
+  score: number
+  todayScore?: number
   keyData: KeyData
   userInfos: UserInfos
+}
+
+export type userDataType = {
+  userInfos: UserType
+}
+
+export type UserClassType = {
+  userInfos: UserType
+  userActivity: SessionType[]
+  userAverageSessions: AverageSessionType[]
+  formatUserAverageSessions: (arg: AverageSessionType) => AverageSessionType
+  formatUserPerfsKind: (arg: Kinds) => string
+  getUserInfos: () => UserType
+  getUserActivity: () => SessionType[]
+  getUserPerformance: () => UserPerformanceType
+  getUserAverageSessions: () => AverageSessionType[]
+  returnTheGoodCard: (arg0: string) => string
+}
+
+export type UserClassConstructorType = {
+  userData: UserType
+  userActivity: UserActivity
+  userPerformance: UserPerformanceType
+  userAverageSessions: SessionAverageSessionType
+}
+
+export type User = {
+  user: UserClassType
 }
 
 export type KeyData = {
@@ -12,7 +41,7 @@ export type KeyData = {
   proteinCount: number
 }
 
-type UserInfos = {
+export type UserInfos = {
   age: number
   firstName: string
   lastName: string
@@ -20,11 +49,11 @@ type UserInfos = {
 
 export type UserPerformanceType = {
   userId: number
-  kind: KindType | any
+  kind: KindType | number
   data: DataPerfType[]
 }
 
-type KindType = {
+export type KindType = {
   1: "cardio"
   2: "energy"
   3: "endurance"
@@ -33,14 +62,19 @@ type KindType = {
   6: "intensity"
 }
 
+type Kinds = "cardio" | "energy" | "endurance" | "strength" | "speed" | "intensity"
+
+// type ConstructKindType<Type> = {
+//   [Property in keyof Type]: string
+// }
+
 export type DataPerfType = {
   value: number
   kind: number
 }
 
 export type UserActivity = {
-  userId: number
-  sessions: SessionType
+  sessions: SessionType[]
 }
 
 export type SessionType = {
@@ -50,6 +84,10 @@ export type SessionType = {
 }
 
 export type AverageSessionType = {
-  day: number
+  day: number | string
   sessionLength: number
+}
+
+export type SessionAverageSessionType = {
+  sessions: AverageSessionType[]
 }
