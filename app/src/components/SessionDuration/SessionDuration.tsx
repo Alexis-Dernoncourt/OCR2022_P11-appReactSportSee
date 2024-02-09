@@ -46,7 +46,7 @@ function SessionDuration({ user }: User) {
                     width={730}
                     height={250}
                     data={sessions}
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                    margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
                     onMouseMove={handleMouseMove}
                 >
                     <XAxis dataKey="day" tickLine={false} axisLine={false} tickMargin={20} tickSize={2} />
