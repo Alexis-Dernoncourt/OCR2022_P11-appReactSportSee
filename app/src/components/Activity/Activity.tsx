@@ -2,7 +2,7 @@
 import React from "react"
 import "./Activity.scss"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Label } from "recharts"
-import { SessionType, User } from "../../../types"
+import { User } from "../../../types"
 
 function Activity({ user }: User) {
   const sessions = user.getUserActivity()

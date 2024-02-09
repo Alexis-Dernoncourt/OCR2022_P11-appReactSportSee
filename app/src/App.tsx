@@ -13,13 +13,15 @@ import SessionDuration from "./components/SessionDuration/SessionDuration"
 import UserPerfs from "./components/UserPerfs/UserPerfs"
 import UserScoreAvg from "./components/UserScoreAvg/UserScoreAvg"
 import UserInfosCards from "./components/UserInfosCards/UserInfosCards"
+import { SessionType, UserClassType } from "../types"
+import { AxiosResponse } from "axios"
 
 type UserID = {
   userId?: string
 }
 
 function App() {
-  const [getUser, setUser] = useState()
+  const [getUser, setUser] = useState<UserClassType>()
   const [error, setError] = useState<any>(null)
   const params = useParams<UserID>()
 
@@ -27,12 +29,21 @@ function App() {
     if (!params.userId) throw Error("Id is missing!")
     try {
       // const request = await axiosInstance.request({ url: `/${params.userId}`, method: "get" })
+      // const request1_0: AxiosResponse<{ data: { userId: number; sessions: SessionType[] } }> =
+      //   await axiosInstance.request({
+      //     url: `/${params.userId}/activity`,
+      //     method: "get",
+      //   })
+      // const request2_0: any = await axiosInstance.request({ url: `/${params.userId}/average-sessions`, method: "get" })
+      // console.log("🚀 ~ fetchUser12 ~ request1_0.data:", request1_0.data)
+      // const request3_0: any = await axiosInstance.request({ url: `/${params.userId}/performance`, method: "get" })
       // console.log("🚀 ~ fetchUser12 ~ request:", request)
       const request1: any = await baseApiMock({ id: Number(params.userId), param: "user" })
       const request2: any = await baseApiMock({ id: Number(params.userId), param: "activity" })
       const request3: any = await baseApiMock({ id: Number(params.userId), param: "average-sessions" })
       const request4: any = await baseApiMock({ id: Number(params.userId), param: "performance" })
       const result1 = await request1.data
+      // const result1_0 = request1_0.data
       const result2 = await request2.data
       const result3 = await request3.data
       const result4 = await request4.data
@@ -52,7 +63,7 @@ function App() {
             userAverageSessions: data[2],
             userPerformance: data[3],
           })
-          setUser(user as any) // TODO: find a way to remove any type
+          setUser(user as unknown as UserClassType)
         }
       })
       .catch((e) => {

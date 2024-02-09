@@ -46,7 +46,7 @@ class User {
         }
     }
 
-    public formatUserPerfsKind = (perf: string) => {
+    public formatUserPerfsKind = (perf: string): string => {
         switch (perf) {
             case 'intensity':
                 return 'Intensité'

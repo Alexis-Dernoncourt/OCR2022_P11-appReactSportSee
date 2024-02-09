@@ -64,10 +64,6 @@ export type KindType = {
 
 type Kinds = "cardio" | "energy" | "endurance" | "strength" | "speed" | "intensity"
 
-// type ConstructKindType<Type> = {
-//   [Property in keyof Type]: string
-// }
-
 export type DataPerfType = {
   value: number
   kind: number
