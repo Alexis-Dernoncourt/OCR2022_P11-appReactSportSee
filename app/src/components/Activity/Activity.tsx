@@ -2,14 +2,11 @@
 import React from "react"
 import "./Activity.scss"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Label } from "recharts"
-import { SessionType } from "../../../types"
+import { User } from "../../../types"
 
-type ActivityProps = {
-  userActivity: SessionType[]
-}
-
-function Activity({ userActivity }: ActivityProps) {
-  const activitys = userActivity.map((activity) => {
+function Activity({ user }: User) {
+  const sessions = user.getUserActivity()
+  const activitys = sessions.map((activity) => {
     const convertedDay = new Date(activity.day).getDate()
     return { day: convertedDay, kilogrammes: activity.kilogram, calories: activity.calories }
   })
@@ -19,7 +16,7 @@ function Activity({ userActivity }: ActivityProps) {
       <p className="activity-title">Activité quotidienne</p>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
-          data={activitys}
+          data={activitys && activitys}
           barGap={-40}
           title="Graphique - Activité quotidienne"
           margin={{

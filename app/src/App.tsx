@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react"
 import "./App.scss"
-import { baseApiMock } from "./api/config"
-import { AverageSessionType, SessionType, User, UserPerformanceType } from "../types/index"
+import { axiosInstance, baseApiMock } from "./api/config"
+import User from "./utils/userModelClass"
 import { useParams } from "react-router-dom"
 import Spinner from "./components/Spinner"
 import Header from "./components/Header/Header"
@@ -13,31 +13,37 @@ import SessionDuration from "./components/SessionDuration/SessionDuration"
 import UserPerfs from "./components/UserPerfs/UserPerfs"
 import UserScoreAvg from "./components/UserScoreAvg/UserScoreAvg"
 import UserInfosCards from "./components/UserInfosCards/UserInfosCards"
-// import { useWidowFocus } from "./hooks"
+import { SessionType, UserClassType } from "../types"
+import { AxiosResponse } from "axios"
 
 type UserID = {
   userId?: string
 }
 
 function App() {
-  const [userData, setUserData] = useState<User | null>(null)
-  const [userActivity, setUserActivity] = useState<SessionType[] | null>(null)
-  const [userAverageSessions, setUserAverageSessions] = useState<AverageSessionType[] | null>(null)
-  const [userPerformance, setUserPerformance] = useState<UserPerformanceType | null>(null)
+  const [getUser, setUser] = useState<UserClassType>()
   const [error, setError] = useState<any>(null)
   const params = useParams<UserID>()
-
-  // const { state }: any = useWidowFocus()
 
   async function fetchUser12() {
     if (!params.userId) throw Error("Id is missing!")
     try {
       // const request = await axiosInstance.request({ url: `/${params.userId}`, method: "get" })
-      const request1: any = await baseApiMock("user")
-      const request2: any = await baseApiMock("activity")
-      const request3: any = await baseApiMock("average-sessions")
-      const request4: any = await baseApiMock("performance")
+      // const request1_0: AxiosResponse<{ data: { userId: number; sessions: SessionType[] } }> =
+      //   await axiosInstance.request({
+      //     url: `/${params.userId}/activity`,
+      //     method: "get",
+      //   })
+      // const request2_0: any = await axiosInstance.request({ url: `/${params.userId}/average-sessions`, method: "get" })
+      // console.log("🚀 ~ fetchUser12 ~ request1_0.data:", request1_0.data)
+      // const request3_0: any = await axiosInstance.request({ url: `/${params.userId}/performance`, method: "get" })
+      // console.log("🚀 ~ fetchUser12 ~ request:", request)
+      const request1: any = await baseApiMock({ id: Number(params.userId), param: "user" })
+      const request2: any = await baseApiMock({ id: Number(params.userId), param: "activity" })
+      const request3: any = await baseApiMock({ id: Number(params.userId), param: "average-sessions" })
+      const request4: any = await baseApiMock({ id: Number(params.userId), param: "performance" })
       const result1 = await request1.data
+      // const result1_0 = request1_0.data
       const result2 = await request2.data
       const result3 = await request3.data
       const result4 = await request4.data
@@ -50,10 +56,15 @@ function App() {
   useEffect(() => {
     fetchUser12()
       .then((data) => {
-        data && setUserData(data[0])
-        data && setUserActivity(data[1].sessions)
-        data && setUserAverageSessions(data[2].sessions)
-        data && setUserPerformance(data[3])
+        if (data) {
+          const user = new User({
+            userData: data[0],
+            userActivity: data[1],
+            userAverageSessions: data[2],
+            userPerformance: data[3],
+          })
+          setUser(user as unknown as UserClassType)
+        }
       })
       .catch((e) => {
         setError(e)
@@ -63,7 +74,7 @@ function App() {
   return (
     <div className="app">
       <>
-        {!userActivity || !userData ? (
+        {!getUser ? (
           <Spinner />
         ) : (
           <>
@@ -73,35 +84,39 @@ function App() {
                 <div className="app-content-container">
                   <SideNav />
                   {error && <div>Error: {error.message}</div>}
-                  {userData && <Name firstName={userData.userInfos.firstName} lastName={userData.userInfos.lastName} />}
-                  {userActivity && (
-                    <div className="activity-container">
-                      <Activity userActivity={userActivity} />
-                    </div>
-                  )}
-                  <div className="app-inside-content-layout">
-                    <div className="app-inside-content-container">
-                      {userAverageSessions && (
-                        <div className="session-duration-container">
-                          <SessionDuration userAverageSessions={userAverageSessions} />
+                  {getUser && (
+                    <>
+                      {<Name user={getUser} />}
+                      {
+                        <div className="activity-container">
+                          <Activity user={getUser} />
                         </div>
-                      )}
-                      {userPerformance && (
-                        <div className="user-perfs-container">
-                          <UserPerfs userPerformance={userPerformance} />
+                      }
+                      <div className="app-inside-content-layout">
+                        <div className="app-inside-content-container">
+                          {
+                            <div className="session-duration-container">
+                              <SessionDuration user={getUser} />
+                            </div>
+                          }
+                          {
+                            <div className="user-perfs-container">
+                              <UserPerfs user={getUser} />
+                            </div>
+                          }
+                          {
+                            <div className="score-avg-container">
+                              <UserScoreAvg user={getUser} />
+                            </div>
+                          }
                         </div>
-                      )}
-                      {userData.todayScore && (
-                        <div className="score-avg-container">
-                          <UserScoreAvg userScore={userData.todayScore} />
+                      </div>
+                      {
+                        <div className="user-cardinfos-container">
+                          <UserInfosCards user={getUser} />
                         </div>
-                      )}
-                    </div>
-                  </div>
-                  {userData.keyData && (
-                    <div className="user-cardinfos-container">
-                      <UserInfosCards userInfos={userData.keyData} />
-                    </div>
+                      }
+                    </>
                   )}
                 </div>
               </main>

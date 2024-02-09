@@ -2,12 +2,15 @@
 /* eslint-disable prettier/prettier */
 import React from "react"
 import "./UserScoreAvg.scss"
-import { RadialBarChart, RadialBar, Tooltip, ResponsiveContainer } from 'recharts'
+import { RadialBarChart, RadialBar, ResponsiveContainer } from 'recharts'
+import { User } from '../../../types'
 
-function UserScoreAvg({ userScore }: { userScore: number }) {
+function UserScoreAvg({ user }: User) {
+    const userInfos = user.getUserInfos()
+    const score = userInfos.score || 0
     const data = [
         {
-            avg: userScore * 100,
+            avg: score! * 100,
             objectif: 100,
             fill: '#FF0101',
         }
@@ -15,7 +18,7 @@ function UserScoreAvg({ userScore }: { userScore: number }) {
     return (
         <>
             <div className='user-score-main-title'>Score</div>
-            <div className='user-score-title'>{userScore * 100}% <br />de votre <br />objectif</div>
+            <div className='user-score-title'>{score! * 100}% <br />de votre <br />objectif</div>
             <ResponsiveContainer width="100%" height="100%" style={{ backgroundColor: '#00000005', borderRadius: '10px' }}>
                 <RadialBarChart
                     innerRadius="100%"

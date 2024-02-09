@@ -1,34 +1,18 @@
 /* eslint-disable prettier/prettier */
 import React from "react"
 import "./UserInfosCards.scss"
-import { KeyData } from '../../../types'
+import { User } from "../../../types"
 
-type UserInfosCardsProps = {
-    userInfos: KeyData
-}
 
-function UserInfosCards({ userInfos }: UserInfosCardsProps) {
-    function returnTheGoodCard(reference: any) {
-        switch (reference) {
-            case 'calorieCount':
-                return 'Calories'
-            case 'carbohydrateCount':
-                return 'Glucides'
-            case 'lipidCount':
-                return 'Lipides'
-            case 'proteinCount':
-                return 'Protéines'
-            default:
-                break;
-        }
-    }
-
+function UserInfosCards({ user }: User) {
+    const userInfos = user.userInfos.keyData
     return (
         <>
             {
                 Object.entries(userInfos).map((info) => {
-                    const userInfosClass = returnTheGoodCard(info[0])
+                    const userInfosClass = user.returnTheGoodCard(info[0])
                     return (
+                        // TODO: remove into component ?
                         <div key={info[0]} className='card-info-container'>
                             <div className={userInfosClass + ' card-info-item'}>
                                 <div className='card-info-text-item'>
