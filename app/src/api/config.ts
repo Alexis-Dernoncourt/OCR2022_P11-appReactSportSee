@@ -9,7 +9,7 @@ export const axiosInstance = axios.create({
   baseURL: BASE_URL,
 })
 
-export const baseApiMock = ({ id, param }: { id: number; param: string }) =>
+export const baseApiMock = ({ id, param }: { id: number; param: string }): Promise<unknown> =>
   new Promise((resolve, reject) => {
     const user_data = import(`./mock/user-${id}/${param === "user" ? param : "user-" + param}.mock.json`)
     if (!user_data) reject("Erreur API.")

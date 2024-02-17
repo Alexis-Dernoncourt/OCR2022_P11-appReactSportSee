@@ -13,8 +13,15 @@ import SessionDuration from "./components/SessionDuration/SessionDuration"
 import UserPerfs from "./components/UserPerfs/UserPerfs"
 import UserScoreAvg from "./components/UserScoreAvg/UserScoreAvg"
 import UserInfosCards from "./components/UserInfosCards/UserInfosCards"
-import { SessionType, UserClassType } from "../types"
-import { AxiosResponse } from "axios"
+import {
+  SessionAverageSessionType,
+  SessionType,
+  UserActivity,
+  UserClassType,
+  UserPerformanceType,
+  UserType,
+} from "../types"
+// import { AxiosResponse } from "axios"
 
 type UserID = {
   userId?: string
@@ -22,11 +29,13 @@ type UserID = {
 
 function App() {
   const [getUser, setUser] = useState<UserClassType>()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [error, setError] = useState<any>(null)
   const params = useParams<UserID>()
+  const regx = new RegExp(/\d+/)
 
   async function fetchUser12() {
-    if (!params.userId) throw Error("Id is missing!")
+    if (!params.userId || !regx.test(params.userId)) throw new Error("Id is invalid !")
     try {
       // const request = await axiosInstance.request({ url: `/${params.userId}`, method: "get" })
       // const request1_0: AxiosResponse<{ data: { userId: number; sessions: SessionType[] } }> =
@@ -38,15 +47,19 @@ function App() {
       // console.log("🚀 ~ fetchUser12 ~ request1_0.data:", request1_0.data)
       // const request3_0: any = await axiosInstance.request({ url: `/${params.userId}/performance`, method: "get" })
       // console.log("🚀 ~ fetchUser12 ~ request:", request)
-      const request1: any = await baseApiMock({ id: Number(params.userId), param: "user" })
-      const request2: any = await baseApiMock({ id: Number(params.userId), param: "activity" })
-      const request3: any = await baseApiMock({ id: Number(params.userId), param: "average-sessions" })
-      const request4: any = await baseApiMock({ id: Number(params.userId), param: "performance" })
-      const result1 = await request1.data
+      const request1 = (await baseApiMock({ id: Number(params.userId), param: "user" })) as { data: UserType }
+      const request2 = (await baseApiMock({ id: Number(params.userId), param: "activity" })) as { data: SessionType[] }
+      const request3 = (await baseApiMock({ id: Number(params.userId), param: "average-sessions" })) as {
+        data: UserType
+      }
+      const request4 = (await baseApiMock({ id: Number(params.userId), param: "performance" })) as {
+        data: UserPerformanceType[]
+      }
+      const result1 = request1.data
       // const result1_0 = request1_0.data
-      const result2 = await request2.data
-      const result3 = await request3.data
-      const result4 = await request4.data
+      const result2 = request2.data
+      const result3 = request3.data
+      const result4 = request4.data
       return Promise.all([result1, result2, result3, result4])
     } catch (error) {
       console.log("Err:", error)
@@ -54,14 +67,15 @@ function App() {
   }
 
   useEffect(() => {
+    error && setError(null)
     fetchUser12()
       .then((data) => {
         if (data) {
           const user = new User({
             userData: data[0],
-            userActivity: data[1],
-            userAverageSessions: data[2],
-            userPerformance: data[3],
+            userActivity: data[1] as unknown as UserActivity,
+            userAverageSessions: data[2] as unknown as SessionAverageSessionType,
+            userPerformance: data[3] as unknown as UserPerformanceType,
           })
           setUser(user as unknown as UserClassType)
         }
@@ -69,12 +83,12 @@ function App() {
       .catch((e) => {
         setError(e)
       })
-  }, [])
+  }, [params.userId])
 
   return (
     <div className="app">
       <>
-        {!getUser ? (
+        {!getUser && !error ? (
           <Spinner />
         ) : (
           <>
@@ -83,8 +97,8 @@ function App() {
               <main className="app-content">
                 <div className="app-content-container">
                   <SideNav />
-                  {error && <div>Error: {error.message}</div>}
-                  {getUser && (
+                  {error && <div style={{ padding: "10px", color: "red" }}>Error: {error.message}</div>}
+                  {getUser && !error && (
                     <>
                       {<Name user={getUser} />}
                       {

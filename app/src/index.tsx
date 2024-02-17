@@ -20,6 +20,10 @@ const router = createBrowserRouter([
     path: "/user/:userId",
     element: <App />,
   },
+  {
+    path: "*",
+    element: <Navigate to={"/user/12"} />,
+  },
 ])
 
 root.render(
