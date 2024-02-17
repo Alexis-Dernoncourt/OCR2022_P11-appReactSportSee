@@ -11,4 +11,4 @@ Make sure Yarn is installed.
 - The `npm i` command from `app` folder will install the dependencies.
 - The `npm start` command will allow you to run the app in browser.
 
-### Check README files from `app` & `beckend` folder.
+### Check README files from `app` & `backend` folder.
